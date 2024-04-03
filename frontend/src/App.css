@@ -1,0 +1,109 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.App {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.formation-select {
+  margin-bottom: 0px;
+}
+
+.pitch {
+  color: #ccc;
+  display: flex;
+  justify-content: center;
+}
+
+.position {
+  color: black;
+  position: relative;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.player {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: white;
+  z-index: 1;
+}
+
+.player button {
+  cursor: pointer;
+}
+
+/* App.css */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 5px;
+  color: black;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.player-option {
+  margin: 5px;
+}
+
+.player-option:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+
+.player-option h4,
+.player-option p {
+  margin: 0;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.login-modal .modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%; 
+  max-width: 400px; 
+}
+
+.blur-background {
+  filter: blur(5px);
+}
