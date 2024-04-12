@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx';
-import Registration from './registration.tsx';
-import './index.css';
-
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import Registration from "./registration.tsx";
+import "./index.css";
 
 const Main: React.FC = () => {
   const [sessionActive, setSessionActive] = useState(false);
@@ -14,9 +13,13 @@ const Main: React.FC = () => {
 
   return (
     <React.StrictMode>
-      {sessionActive ? <App /> : <Registration onRegister={handleRegistration} />}
+      {sessionActive ? (
+        <App />
+      ) : (
+        <Registration onRegister={handleRegistration} />
+      )}
     </React.StrictMode>
   );
 };
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<Main />);
+ReactDOM.createRoot(document.getElementById("root")!).render(<Main />);

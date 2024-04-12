@@ -1,16 +1,62 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 const formations = [
-  { name: '4-4-2', positions: ['GK', 'LB', 'CB', 'CB', 'RB', 'LM', 'CM', 'CM', 'RM', 'ST', 'ST'] },
-  { name: '4-3-3', positions: ['GK', 'LB', 'CB', 'CB', 'RB', 'CDM', 'CM', 'CAM', 'LW', 'ST', 'RW'] },
+  {
+    name: "4-4-2",
+    positions: [
+      "GK",
+      "LB",
+      "CB",
+      "CB",
+      "RB",
+      "LM",
+      "CM",
+      "CM",
+      "RM",
+      "ST",
+      "ST",
+    ],
+  },
+  {
+    name: "4-3-3",
+    positions: [
+      "GK",
+      "LB",
+      "CB",
+      "CB",
+      "RB",
+      "CDM",
+      "CM",
+      "CAM",
+      "LW",
+      "ST",
+      "RW",
+    ],
+  },
 ];
-
+interface Players {
+  name: string;
+  nation: string;
+  club: string;
+  position: string;
+  age: number;
+  overall: number;
+  pace: number;
+  shooting: number;
+  passing: number;
+  dribbling: number;
+  defending: number;
+  physicality: number;
+  card_image: string;
+  gender: string;
+  isActive: boolean;
+}
 const players = [
-  { id: 1, name: 'Trent', rating: 90, position:'RB' },
-  { id: 2, name: 'Allison', rating: 85, position:'GK'},
-  { id: 3, name: 'Walker', rating: 88, position:'RB' },
-  { id: 4, name: 'Neur', rating: 86, position:'GK'},
+  { id: 1, name: "Trent", rating: 90, position: "RB" },
+  { id: 2, name: "Allison", rating: 85, position: "GK" },
+  { id: 3, name: "Walker", rating: 88, position: "RB" },
+  { id: 4, name: "Neur", rating: 86, position: "GK" },
 ];
 
 interface SelectedPlayer {
@@ -18,12 +64,12 @@ interface SelectedPlayer {
   player: any;
 }
 
-function App(){
-  const [selectedFormation, setSelectedFormation] = useState<string>('4-4-2');
-  const [selectedPlayers, setSelectedPlayers] = useState<SelectedPlayer[]>([]);
+function App() {
+  const [selectedFormation, setSelectedFormation] = useState<string>("4-4-2");
+  const [selectedPlayers, setSelectedPlayers] = useState<Players[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedPosition, setSelectedPosition] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const handleFormationSelect = (formationName: string) => {
     setSelectedFormation(formationName);
@@ -33,21 +79,26 @@ function App(){
   const handlePositionClick = (position: string) => {
     setShowModal(true);
     setSelectedPosition(position);
-    setSearchQuery('');
+    setSearchQuery("");
   };
 
   const handlePlayerSelect = (player: any) => {
     setShowModal(false);
-    const existingPlayerIndex = selectedPlayers.findIndex(p => p.position === selectedPosition);
+    const existingPlayerIndex = selectedPlayers.findIndex(
+      (p) => p.position === selectedPosition
+    );
     if (existingPlayerIndex !== -1) {
       const updatedSelectedPlayers = [...selectedPlayers];
-      updatedSelectedPlayers[existingPlayerIndex] = { position: selectedPosition as string, player };
+      updatedSelectedPlayers[existingPlayerIndex] = {
+        position: selectedPosition as string,
+        player,
+      };
       setSelectedPlayers(updatedSelectedPlayers);
     } else {
-      setSelectedPlayers(prevState => ([
+      setSelectedPlayers((prevState) => [
         ...prevState,
-        { position: selectedPosition as string, player }
-      ]));
+        { position: selectedPosition as string, player },
+      ]);
     }
   };
 
@@ -59,35 +110,64 @@ function App(){
     setSearchQuery(event.target.value);
   };
 
-  const filteredPlayers = players.filter(player =>
-    player.position === selectedPosition &&
-    player.name.toLowerCase().includes(searchQuery.toLowerCase())
-  ).slice(0, 5);
+  const filteredPlayers = players
+    .filter(
+      (player) =>
+        player.position === selectedPosition &&
+        player.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .slice(0, 5);
 
   return (
     <div className="App">
       <h1>FUT Draft</h1>
       <div className="formation-select">
         <h2>Select Formation:</h2>
-        <select value={selectedFormation} onChange={(e) => handleFormationSelect(e.target.value)}>
+        <select
+          value={selectedFormation}
+          onChange={(e) => handleFormationSelect(e.target.value)}
+        >
           {formations.map((formation, index) => (
-            <option key={index} value={formation.name}>{formation.name}</option>
+            <option key={index} value={formation.name}>
+              {formation.name}
+            </option>
           ))}
         </select>
       </div>
       <div className="pitch">
-        {formations.find(formation => formation.name === selectedFormation)?.positions.map((position, index) => (
-          <div key={index} className={`position ${position}`} onClick={() => handlePositionClick(position)}>
-            <h3>{position}</h3>
-            {/* Player Card */}
-            {selectedPlayers.find(player => player.position === position) && (
-              <div className="player">
-                <h4>{selectedPlayers.find(player => player.position === position)?.player.name}</h4>
-                <p>Rating: {selectedPlayers.find(player => player.position === position)?.player.rating}</p>
-              </div>
-            )}
-          </div>
-        ))}
+        {formations
+          .find((formation) => formation.name === selectedFormation)
+          ?.positions.map((position, index) => (
+            <div
+              key={index}
+              className={`position ${position}`}
+              onClick={() => handlePositionClick(position)}
+            >
+              <h3>{position}</h3>
+              {/* Player Card */}
+              {selectedPlayers.find(
+                (player) => player.position === position
+              ) && (
+                <div className="player">
+                  <h4>
+                    {
+                      selectedPlayers.find(
+                        (player) => player.position === position
+                      )?.player.name
+                    }
+                  </h4>
+                  <p>
+                    Rating:{" "}
+                    {
+                      selectedPlayers.find(
+                        (player) => player.position === position
+                      )?.player.rating
+                    }
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
       </div>
       {showModal && (
         <div className="modal">
@@ -99,8 +179,12 @@ function App(){
               onChange={handleSearchChange}
             />
             <hr />
-            {filteredPlayers.map(player => (
-              <div key={player.id} className="player-option" onClick={() => handlePlayerSelect(player)}>
+            {filteredPlayers.map((player) => (
+              <div
+                key={player.id}
+                className="player-option"
+                onClick={() => handlePlayerSelect(player)}
+              >
                 <h4>{player.name}</h4>
                 <p>Rating: {player.rating}</p>
               </div>
@@ -109,7 +193,9 @@ function App(){
           </div>
         </div>
       )}
-      <button onClick={() => console.log(selectedPlayers)}>Send to Backend</button>
+      <button onClick={() => console.log(selectedPlayers)}>
+        Send to Backend
+      </button>
     </div>
   );
 }
