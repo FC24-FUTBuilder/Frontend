@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import axiosClient from "./utils/axiosClient";
+import { Pitch } from "./Pitch";
 const formations = [
   {
     name: "4-4-2",
@@ -94,12 +95,16 @@ export default function App() {
     _id: "",
     name: "",
   });
+  const [formationPositions, setFormationPositions] = useState<string[]>([]);
   const [selectedPosition, setSelectedPosition] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const handleFormationSelect = (formationName: string) => {
     setSelectedFormation(formationName);
-    setSelectedPlayers([]);
+    const formationObj = formations.find((f) => f.name === formationName);
+    const position = formationObj.positions ? formationObj.positions : [];
+    setFormationPositions(formationPositions);
+    setFormationPositions(position);
   };
   const handlePositionClick = (position: string) => {
     setShowModal(true);
@@ -129,46 +134,61 @@ export default function App() {
     }
   };
   return (
-    <div className="pitch">
-      <div className="player">
-        <button onClick={() => setShowModal(true)}></button>
-      </div>
-      {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <div className="search-component">
-              <select
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              >
-                <option value="">Select a position</option>
-                {positions.map((position, index) => (
-                  <option key={index} value={position}>
-                    {position}
-                  </option>
-                ))}
-              </select>
-              <button onClick={handleSearchModelClick}>Search</button>
-            </div>
-            <div className="result-component">
-              {searchResult && (
+    <div className="App">
+      <h1>Hi User, Pick your team</h1>
+      <h3>Select Formation: </h3>
+      <select
+        value={formation}
+        onChange={(e) => handleFormationSelect(e.target.value)}
+      >
+        {formations.map((formation, index) => (
+          <option key={index} value={formation.name}>
+            {formation.name}
+          </option>
+        ))}
+      </select>
+      <Pitch formation={formation} positions={formationPositions}></Pitch>
+      {/*<div className="pitch">
+        <div className="player">
+          <button onClick={() => setShowModal(true)}>ST</button>
+        </div>
+        {showModal && (
+          <div className="modal">
+            <div className="modal-content">
+              <div className="search-component">
                 <select
-                  value={selectedPlayer._id}
-                  onChange={(e) => setSelectedPlayer(e.target.value)}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 >
-                  {searchResult.map((player, index) => (
-                    <option key={index} value={player._id}>
-                      {player.name}
+                  <option value="">Select a position</option>
+                  {positions.map((position, index) => (
+                    <option key={index} value={position}>
+                      {position}
                     </option>
                   ))}
                 </select>
-              )}
+                <button onClick={handleSearchModelClick}>Search</button>
+              </div>
+              <div className="result-component">
+                {searchResult && (
+                  <select
+                    value={selectedPlayer._id}
+                    onChange={(e) => setSelectedPlayer(e.target.value)}
+                  >
+                    {searchResult.map((player, index) => (
+                      <option key={index} value={player._id}>
+                        {player.name}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+              <button onClick={() => setShowModal(false)}>Set Player</button>
+              <button onClick={() => setShowModal(false)}>Close</button>
             </div>
-            <button onClick={() => setShowModal(false)}>Set Player</button>
-            <button onClick={() => setShowModal(false)}>Close</button>
           </div>
-        </div>
-      )}
+        )}
+      </div>*/}
     </div>
   );
 }
