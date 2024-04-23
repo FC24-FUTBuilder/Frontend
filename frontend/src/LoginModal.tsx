@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axiosClient from "./utils/axiosClient";
-
+import "./Login.css";
 interface LoginModalProps {
   onLogin: () => void;
   onRegister: () => void;
@@ -34,34 +34,42 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, onRegister }) => {
       console.log(`User Registration failed: ${error}`);
     }
   };
-  return (
+  return (    
     <div>
-      <div>
+            <video className="background-video" autoPlay loop muted >
+  <source src="src/assets/background_video.mp4" type="video/mp4"/>
+</video>
+      <div className="form-box">
+      <h2 className="headers">FUT</h2>
         <h2>Login</h2>
         <form>
-          <label htmlFor="username">Username or Email:</label>
+          <label className="ulabel" htmlFor="username">Username or Email</label>
+          <br/>
           <input
+          className="inputfield"
             type="text"
             id="username"
             name="username"
             value={loginForm.username}
             onChange={(e) => handleChange(e, "username")}
           />
-          <br />
-          <label htmlFor="password">Password:</label>
-          <input
+          <br /><br/>
+          <label className="plabel" htmlFor="password">Password</label>
+          <br/>
+          <input className="inputfield"
             type="password"
             id="password"
             name="password"
             value={loginForm.password}
             onChange={(e) => handleChange(e, "password")}
           />
-          <br />
-          <button type="button" onClick={handleLogin}>
+          <br /><br/>
+          <button className="button" type="button" onClick={handleLogin}>
             Login
           </button>
         </form>
-        <button onClick={onRegister}>Register</button>
+        <br />
+        <button className="rbutton" onClick={onRegister}>Register</button>
       </div>
     </div>
   );

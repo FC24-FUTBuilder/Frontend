@@ -1,9 +1,4 @@
-.pitch {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.player {
+/* .player {
   top: 50%;
   left: 50%;
   border: 1px solid #ccc;
@@ -11,4 +6,91 @@
   padding: 5px;
   background-color: white;
   z-index: 1;
+} */
+
+/* Styles for formation buttons */
+
+
+.Pitch{
+  height: 650px;
+  width: 100%;
+  min-width: 320px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.formation-buttons {
+  text-align: center;
+}
+
+.formation-button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.formation-button.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Styles for the pitch */
+
+
+.midfielders-container,
+.attackers-container{
+  display: grid;
+  margin: 50px auto;
+  width: 80vw;
+  gap:10px;
+  padding-top: 50px;
+}
+
+.goalkeeper-container{
+  display: grid;
+  margin: 50px auto;
+  width: 80vw;
+  gap:10px;
+  padding-top: 10px;
+}
+
+.defenders-container{
+  display: grid;
+  margin: 50px auto;
+  width: 80vw;
+  gap:10px;
+  padding-top: 60px;
+}
+.pitch-container {
+  display: grid;
+  margin: 50px auto;
+  width: 80vw;
+  max-width: 800px;
+  background-color: #f0f0f0;
+  border: 1px solid #000;
+  position: relative;
+  height: 400px; /* Adjust as needed */
+}
+
+.player {
+  width: 50px;
+  height: 50px;
+  background-color: #ccc;
+  border: 1px solid #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.card{
+  width: 100px;
+  height: 120px;
+}
+.card-button{
+  border:none;
+  background: none;
 }

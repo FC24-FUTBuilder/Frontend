@@ -59,18 +59,61 @@ export const Pitch: React.FC<PitchComponentProps> = ({
       console.log(err);
     }
   };
+
+
+
+
   return (
     <div>
       <h3>{formation}</h3>
       <div className="Pitch">
-        {positions &&
-          positions.map((pos, index) => (
-            <div className="player">
-              <button key={index} onClick={() => setShowModal(true)}>
-                {pos}
-              </button>
-            </div>
-          ))}
+<div>
+
+  {/* Attackers container */}
+  <div className="attackers-container" style={{ display: 'grid', gridTemplateColumns: `repeat(${parseInt(formation.split('-')[2])}, 1fr)` }}>
+    {positions.slice(parseInt(formation.split('-')[0]) + parseInt(formation.split('-')[1]) + 1).map((pos, index) => (
+      <div key={index} className="player">
+        <button className="card-button" onClick={() => setShowModal(true)}><img className="card" src="src/assets/empty.png"/>{pos}</button>
+      </div>
+    ))}
+  </div>
+
+    {/* Midfielders container */}
+    <div className="midfielders-container" style={{ display: 'grid', gridTemplateColumns: `repeat(${parseInt(formation.split('-')[1])}, 1fr)` }}>
+    {positions.slice(parseInt(formation.split('-')[0]) + 1, parseInt(formation.split('-')[0]) + parseInt(formation.split('-')[1]) + 1).map((pos, index) => (
+      <div key={index} className="player">
+        <button className="card-button" onClick={() => setShowModal(true)}><img className="card" src="src/assets/empty.png"/>{pos}</button>
+      </div>
+    ))}
+  </div>
+
+    {/* Defenders container */}
+    <div className="defenders-container" style={{ display: 'grid', gridTemplateColumns: `repeat(${parseInt(formation.split('-')[0])}, 1fr)` }}>
+    {positions.slice(1, parseInt(formation.split('-')[0]) + 1).map((pos, index) => (
+      <div key={index} className="player">
+        <button className="card-button" onClick={() => setShowModal(true)}><img className="card" src="src/assets/empty.png"/>{pos}</button>
+      </div>
+    ))}
+  </div>
+
+  {/* Goalkeeper container */}
+  <div className="goalkeeper-container">
+  {positions.slice(0,1).map((pos,index)=>(
+    <div key={index} className="player">
+      <button className="card-button" onClick={() => setShowModal(true)}>
+        <img className="card" src="src/assets/empty.png"/>
+       {pos}</button>
+    </div>
+  ))}
+  </div>
+
+
+
+
+
+</div>
+
+
         {showModal && (
           <div className="modal">
             <div className="modal-content">
