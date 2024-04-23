@@ -32,10 +32,9 @@ export const Pitch: React.FC<PitchComponentProps> = ({
     },
   ]);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [selectedPlayer, setSelectedPlayer] = useState<SelectedPlayer>({
-    _id: "",
-    name: "",
-  });
+  const [selectedPlayer, setSelectedPlayer] = useState<SelectedPlayer | null>(
+    null
+  );
   const [searchQuery, setSearchQuery] = useState<string>("");
   const objToArray = (obj: JSON) => {
     return Object.keys(obj).map((key) => ({
@@ -45,10 +44,10 @@ export const Pitch: React.FC<PitchComponentProps> = ({
   const handleSearchModelClick = async () => {
     setShowModal(true);
     try {
-      const pos = searchQuery != "" ? searchQuery : "";
+      const name = searchQuery != "" ? searchQuery : "";
       let response = {};
-      if (pos) {
-        response = await client.get(`/players/list?pos=${pos}`);
+      if (name) {
+        response = await client.get(`/players/list?name=${name}`);
       } else {
         response = await client.get(`/players/list`);
       }
@@ -59,15 +58,31 @@ export const Pitch: React.FC<PitchComponentProps> = ({
       console.log(err);
     }
   };
+  const handleCloseModal = () => {
+    setSearchQuery("");
+    setShowModal(false);
+  };
+  const handleSelectPlayer = (_id, name) => {
+    setSelectedPlayer({
+      _id: _id,
+      name: name,
+    });
+    console.log(_id, name);
+    setShowModal(false);
+  };
   return (
     <div>
       <h3>{formation}</h3>
-      <div className="Pitch">
+      <div className="pitch">
         {positions &&
           positions.map((pos, index) => (
-            <div className="player">
-              <button key={index} onClick={() => setShowModal(true)}>
-                {pos}
+            <div className="player" key={index}>
+              <button onClick={() => setShowModal(true)}>
+                {selectedPlayer && selectedPlayer._id ? (
+                  <div>{selectedPlayer.name}</div>
+                ) : (
+                  pos
+                )}
               </button>
             </div>
           ))}
@@ -75,35 +90,50 @@ export const Pitch: React.FC<PitchComponentProps> = ({
           <div className="modal">
             <div className="modal-content">
               <div className="search-component">
-                <select
+                <input
+                  type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                >
-                  <option value="">Select a position</option>
-                  {positions.map((position, index) => (
-                    <option key={index} value={position}>
-                      {position}
-                    </option>
-                  ))}
-                </select>
+                ></input>
                 <button onClick={handleSearchModelClick}>Search</button>
               </div>
               <div className="result-component">
                 {searchResult && (
-                  <select
-                    value={selectedPlayer._id}
-                    onChange={(e) => setSelectedPlayer(e.target.value)}
-                  >
-                    {searchResult.map((player, index) => (
-                      <option key={index} value={player._id}>
-                        {player.name}
-                      </option>
-                    ))}
-                  </select>
+                  <div style={{ maxHeight: "350px", overflowY: "auto" }}>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Club</th>
+                          <th>Nation</th>
+                          <th>Overall</th>
+                          <th>Select</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {searchResult.map((player) => (
+                          <tr key={player._id}>
+                            <td>{player.name}</td>
+                            <td>{player.club}</td>
+                            <td>{player.nation}</td>
+                            <td>{player.overall}</td>
+                            <td>
+                              <button
+                                onClick={() =>
+                                  handleSelectPlayer(player._id, player.name)
+                                }
+                              >
+                                Pick!
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 )}
               </div>
-              <button onClick={() => setShowModal(false)}>Set Player</button>
-              <button onClick={() => setShowModal(false)}>Close</button>
+              <button onClick={handleCloseModal}>Close</button>
             </div>
           </div>
         )}
