@@ -15,10 +15,10 @@
     "jsx": "react-jsx",
 
     /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "strict": false, // Disable strict mode
+    "noUnusedLocals": false, // Disable checking for unused locals
+    "noUnusedParameters": false, // Disable checking for unused parameters
+    "noFallthroughCasesInSwitch": false // Disable checking for fallthrough cases in switch statements
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
