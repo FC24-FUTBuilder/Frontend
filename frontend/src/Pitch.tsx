@@ -31,7 +31,7 @@ interface Players {
   isActive: boolean;
 }
 interface Team {
-  players: Players;
+  players: any;
   formation: string;
   overallRating: number;
 }
