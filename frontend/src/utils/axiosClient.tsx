@@ -11,8 +11,8 @@ const axiosClient = (token: string | null = null): AxiosInstance => {
       };
 
   const client = axios.create({
-    //baseURL: "http://dog.ceo/api",
-    baseURL: "http://localhost:8000",
+    baseURL: "https://fut-builder-backend-production.up.railway.app",
+    // baseURL: "http://localhost:8000",
     headers,
     timeout: 50000,
     withCredentials: false,
