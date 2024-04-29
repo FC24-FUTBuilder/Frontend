@@ -8,9 +8,9 @@ import LoginModal from "./LoginModal.tsx";
 import { Admin } from "./Admin.tsx";
 
 const Main: React.FC = () => {
-  const [sessionActive, setSessionActive] = useState(false);
-  const [login, setLogin] = useState(true);
-  const [userDetails, setUserDetails] = useState({});
+  const [sessionActive, setSessionActive] = useState<boolean>(false);
+  const [login, setLogin] = useState<boolean>(true);
+  const [userDetails, setUserDetails] = useState<any>({});
   const handleRegistration = () => {
     setLogin(true);
     setSessionActive(false);

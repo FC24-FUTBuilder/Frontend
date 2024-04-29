@@ -54,7 +54,7 @@ export const Admin: React.FC<AdminComponentProps> = ({ userData }) => {
   const handleSearchModelClick = async () => {
     try {
       const name = searchQuery != "" ? searchQuery : "";
-      let response = {};
+      let response: any = {};
       if (name) {
         response = await client.get(`/players/list?name=${name}`);
       } else {
@@ -71,7 +71,7 @@ export const Admin: React.FC<AdminComponentProps> = ({ userData }) => {
   };
   const handleEditClick = async (_id) => {
     setShowModal(false);
-    let response = {};
+    let response: any = {};
     try {
       if (_id) {
         response = await client.get(`/players/playerdetails?id=${_id}`);
@@ -90,7 +90,7 @@ export const Admin: React.FC<AdminComponentProps> = ({ userData }) => {
   };
   const updatePlayerData = async (updatedPlayer) => {
     const playerId = updatedPlayer?._id;
-    let response = {};
+    let response: any = {};
     if (playerId) {
       try {
         response = await client.post(
@@ -98,7 +98,6 @@ export const Admin: React.FC<AdminComponentProps> = ({ userData }) => {
           updatedPlayer
         );
         const player = response.data.data;
-        console.log(response.data);
         setPlayertoEdit(player);
         alert("Player updated successfully");
       } catch (err) {

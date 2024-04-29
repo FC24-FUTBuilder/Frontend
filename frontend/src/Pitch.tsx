@@ -65,7 +65,7 @@ export const Pitch: React.FC<PitchComponentProps> = ({
     setShowModal(true);
     try {
       const pos = searchQuery != "" ? searchQuery : "";
-      let response = {};
+      let response: any = {};
       if (pos) {
         response = await client.get(`/players/list?pos=${pos}`);
       } else {
@@ -84,7 +84,7 @@ export const Pitch: React.FC<PitchComponentProps> = ({
   };
   const handleSetPlayer = async () => {
     const _id = selectedPlayer;
-    let response = {};
+    let response: any = {};
     try {
       response = await client.get(`/players/playerDetails?id=${_id}`);
       const imgURL =

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axiosClient from "./utils/axiosClient";
 
 interface Players {
   name: string;
@@ -35,10 +34,10 @@ export const EditorModel: React.FC<EditorComponentProps> = ({
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    const target = e.target as HTMLInputElement;
     setFormData({
       ...formData,
-      [e.target.name]:
-        e.target.type === "checkbox" ? e.target.checked : e.target.value,
+      [target.name]: target.type === "checkbox" ? target.checked : target.value,
     });
   };
 
