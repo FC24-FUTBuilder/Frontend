@@ -105,6 +105,19 @@ export const Admin: React.FC<AdminComponentProps> = ({ userData }) => {
       }
     }
   };
+  const deletePlayerData = async (_id) => {
+    let response: any = {};
+    try {
+      if (_id) {
+        response = await client.delete(`/players/delete?id=${_id}`);
+      }
+      setShowModal(false);
+      setSearchResult(null);
+      alert(response.data.Message);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const handleOpenModal = () => {
     setEditorComponent(false);
     setPlayertoEdit(null);
@@ -151,7 +164,9 @@ export const Admin: React.FC<AdminComponentProps> = ({ userData }) => {
                             </button>
                           </td>
                           <td>
-                            <button onClick={() => alert("Delete Clicked")}>
+                            <button
+                              onClick={() => deletePlayerData(player._id)}
+                            >
                               delete
                             </button>
                           </td>
