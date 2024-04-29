@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axiosClient from "./utils/axiosClient";
 import "./Registration.css";
+import registrationVideo from "./assets/reg.mp4";
 interface Props {
   onRegister: () => void;
 }
@@ -39,7 +40,7 @@ const Registration: React.FC<Props> = ({ onRegister }) => {
   return (
     <div>
       <video className="background-video" autoPlay loop muted>
-        <source src="src/assets/reg.mp4" type="video/mp4" />
+        <source src={registrationVideo} type="video/mp4" />
       </video>
 
       <div className="form-box">

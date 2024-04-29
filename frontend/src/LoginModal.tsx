@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axiosClient from "./utils/axiosClient";
 import "./Login.css";
+import backgroundVideo from "./assets/background_video.mp4";
 interface LoginModalProps {
   onLogin: () => void;
   onRegister: () => void;
@@ -43,7 +44,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
   return (
     <div>
       <video className="background-video" autoPlay loop muted>
-        <source src="src/assets/background_video.mp4" type="video/mp4" />
+        <source src={backgroundVideo} type="video/mp4" />
       </video>
       <div className="form-box">
         <h2 className="headers">FUT</h2>

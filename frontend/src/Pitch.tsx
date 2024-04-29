@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axiosClient from "./utils/axiosClient";
 import "./Pitch.css";
+import emptyCard from "../src/assets/empty.png";
 interface PitchComponentProps {
   formation: string;
   positions: string[];
@@ -89,7 +90,7 @@ export const Pitch: React.FC<PitchComponentProps> = ({
       response = await client.get(`/players/playerDetails?id=${_id}`);
       const imgURL =
         response.data.data.card_image == null
-          ? "src/assets/empty.png"
+          ? emptyCard
           : response.data.data.card_image;
       image.src = imgURL;
       addReplaceTeamMember(response.data.data);
@@ -189,7 +190,7 @@ export const Pitch: React.FC<PitchComponentProps> = ({
               .map((pos, index) => (
                 <div key={index} className="player">
                   <button className="card-button" onClick={handleCardClick}>
-                    <img className="card" src="src/assets/empty.png" />
+                    <img className="card" src={emptyCard} />
                     {pos}
                   </button>
                 </div>
@@ -216,7 +217,7 @@ export const Pitch: React.FC<PitchComponentProps> = ({
               .map((pos, index) => (
                 <div key={index} className="player">
                   <button className="card-button" onClick={handleCardClick}>
-                    <img className="card" src="src/assets/empty.png" />
+                    <img className="card" src={emptyCard} />
                     {pos}
                   </button>
                 </div>
@@ -238,7 +239,7 @@ export const Pitch: React.FC<PitchComponentProps> = ({
               .map((pos, index) => (
                 <div key={index} className="player">
                   <button className="card-button" onClick={handleCardClick}>
-                    <img className="card" src="src/assets/empty.png" />
+                    <img className="card" src={emptyCard} />
                     {pos}
                   </button>
                 </div>
@@ -250,7 +251,7 @@ export const Pitch: React.FC<PitchComponentProps> = ({
             {positions.slice(0, 1).map((pos, index) => (
               <div key={index} className="player">
                 <button className="card-button" onClick={handleCardClick}>
-                  <img className="card" src="src/assets/empty.png" />
+                  <img className="card" src={emptyCard} />
                   {pos}
                 </button>
               </div>
