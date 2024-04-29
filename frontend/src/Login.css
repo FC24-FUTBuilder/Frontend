@@ -1,45 +1,45 @@
-.form-box{
-    width: 400px;
+.form-box {
+  width: 400px;
   height: 450px;
   background-color: #000000;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin:100px auto;
+  margin: 100px auto;
 }
-.headers{
-    padding-top: 10px;
-    font-family: cursive;
+.headers {
+  padding-top: 10px;
+  font-family: cursive;
 }
-.inputfield{
-    padding: 15px;
-    width: 200px;
+.inputfield {
+  padding: 15px;
+  width: 200px;
 }
-.button{
-    padding: 10px;
+.button {
+  padding: 10px;
 }
 
-.rbutton{
-    margin-top: 15px;
-    margin-left: 290px;
-    border: none;
-    background:none;
+.rbutton {
+  margin-top: 15px;
+  margin-left: 290px;
+  border: none;
+  background: none;
 }
-.ulabel{
-    padding-right: 90px;
+.ulabel {
+  padding-right: 90px;
 }
-.plabel{
-    padding-right: 155px;
+.plabel {
+  padding-right: 155px;
 }
 
 .background-video {
-    height: 100vh;
-    width: 100vw;
-    object-fit: cover;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: -1;
-    filter: brightness(50%);
-  }
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  filter: brightness(50%);
+}

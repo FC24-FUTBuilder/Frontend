@@ -4,12 +4,17 @@ import "./Login.css";
 interface LoginModalProps {
   onLogin: () => void;
   onRegister: () => void;
+  storeUserData: (data: any) => void;
 }
 interface LoginFormData {
   username: string;
   password: string;
 }
-const LoginModal: React.FC<LoginModalProps> = ({ onLogin, onRegister }) => {
+const LoginModal: React.FC<LoginModalProps> = ({
+  onLogin,
+  onRegister,
+  storeUserData,
+}) => {
   const client = axiosClient();
   const [loginForm, setLoginForm] = useState<LoginFormData>({
     username: "",
@@ -29,47 +34,57 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, onRegister }) => {
       const payload = JSON.stringify(loginForm);
       const response = await client.post("/users/login", payload);
       console.log(`User Registered: ${response.data}`);
+      storeUserData(response.data.data);
       onLogin();
     } catch (error) {
       console.log(`User Registration failed: ${error}`);
     }
   };
-  return (    
+  return (
     <div>
-            <video className="background-video" autoPlay loop muted >
-  <source src="src/assets/background_video.mp4" type="video/mp4"/>
-</video>
+      <video className="background-video" autoPlay loop muted>
+        <source src="src/assets/background_video.mp4" type="video/mp4" />
+      </video>
       <div className="form-box">
-      <h2 className="headers">FUT</h2>
+        <h2 className="headers">FUT</h2>
         <h2>Login</h2>
         <form>
-          <label className="ulabel" htmlFor="username">Username or Email</label>
-          <br/>
+          <label className="ulabel" htmlFor="username">
+            Username or Email
+          </label>
+          <br />
           <input
-          className="inputfield"
+            className="inputfield"
             type="text"
             id="username"
             name="username"
             value={loginForm.username}
             onChange={(e) => handleChange(e, "username")}
           />
-          <br /><br/>
-          <label className="plabel" htmlFor="password">Password</label>
-          <br/>
-          <input className="inputfield"
+          <br />
+          <br />
+          <label className="plabel" htmlFor="password">
+            Password
+          </label>
+          <br />
+          <input
+            className="inputfield"
             type="password"
             id="password"
             name="password"
             value={loginForm.password}
             onChange={(e) => handleChange(e, "password")}
           />
-          <br /><br/>
+          <br />
+          <br />
           <button className="button" type="button" onClick={handleLogin}>
             Login
           </button>
         </form>
         <br />
-        <button className="rbutton" onClick={onRegister}>Register</button>
+        <button className="rbutton" onClick={onRegister}>
+          Register
+        </button>
       </div>
     </div>
   );

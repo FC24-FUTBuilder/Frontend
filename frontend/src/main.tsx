@@ -5,10 +5,12 @@ import App from "./App1.tsx";
 import Registration from "./registration.tsx";
 import "./index.css";
 import LoginModal from "./LoginModal.tsx";
+import { Admin } from "./Admin.tsx";
 
 const Main: React.FC = () => {
   const [sessionActive, setSessionActive] = useState(false);
   const [login, setLogin] = useState(true);
+  const [userDetails, setUserDetails] = useState({});
   const handleRegistration = () => {
     setLogin(true);
     setSessionActive(false);
@@ -24,9 +26,17 @@ const Main: React.FC = () => {
   return (
     <React.StrictMode>
       {sessionActive ? (
-        <App />
+        userDetails.username == "admin" ? (
+          <Admin userData={userDetails} />
+        ) : (
+          <App userData={userDetails} />
+        )
       ) : login ? (
-        <LoginModal onLogin={handleLogin} onRegister={handleRegister} />
+        <LoginModal
+          onLogin={handleLogin}
+          onRegister={handleRegister}
+          storeUserData={setUserDetails}
+        />
       ) : (
         <Registration onRegister={handleRegistration} />
       )}
